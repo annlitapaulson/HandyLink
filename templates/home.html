@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Search box and buttons -->
+        <header>
+            <h1>Service Provider</h1>
+            <form action="/search" method="get">
+                <input type="text" name="query" class="search" placeholder="Search by service provider details...">
+            </form>
+
+            <div class="button-group">
+                <button onclick="location.href='/'" class="register-btn">Home</button>
+                <button onclick="location.href='/register'" class="register-btn">Register</button>
+            </div>
+        </header>
+
+        <!-- Service buttons -->
+        <div class="service-buttons">
+            <button onclick="location.href='/filter/software'">Software</button>
+            <button onclick="location.href='/filter/training'">Training</button>
+            <button onclick="location.href='/filter/event_planning'">Event Planning</button>
+            <button onclick="location.href='/filter/marketing'">Marketing</button>
+            <button onclick="location.href='/filter/waste_management'">Waste Management</button>
+            <button onclick="location.href='/filter/construction'">Construction</button>
+            <button onclick="location.href='/filter/health'">Health Service</button>
+            <button onclick="location.href='/filter/insurance'">Insurance</button>
+            <button onclick="location.href='/filter/security'">Security</button>
+            <button onclick="location.href='/filter/travel_service'">Travel Service</button>
+            <button onclick="location.href='/filter/research'">Research</button>
+            <button onclick="location.href='/filter/design'">design</button>
+            <button onclick="location.href='/filter/financial'">Financial</button>
+            <button onclick="location.href='/filter/delivery'">Delivery</button>
+            <button onclick="location.href='/filter/real_estate'">Real Estate</button>
+            <button onclick="location.href='/filter/child_care'">Child Care</button>
+            <button onclick="location.href='/filter/maintenance'">Maintenance</button>
+            <button onclick="location.href='/filter/tech_support'">Technical Support</button>
+            <button onclick="location.href='/filter/video_and_photography'">Videos & Photos</button>
+            <button onclick="location.href='/filter/other'">Other</button>
+          </div>
+
+
+        <!-- Displaying the list of service providers -->
+        <div class="templates-container" id="templatesContainer">
+            {% for provider in providers %}
+            <div class="template" onclick="openTemplateDetail('Name: {{ provider[0] }}\n Service: {{ provider[1]}}\n Area: {{ provider[2]}}\n Phone: {{ provider[3]}}\n Amount: {{ provider[4]}}\n Work: {{ provider[5]}}\n Booking Option: {{ provider[6]}}\n ')">
+                <h3>Name: {{ provider[0] }}</h3>
+                <p>Service: {{ provider[1] }}</p>
+                <p>Work: {{ provider[5]}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Template Detail Modal -->
+        <div id="templateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeTemplateDetail()">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDetails"></p>
+            </div>
+        </div>
+
+        <script>
+            function openTemplateDetail(details) {
+                document.getElementById("modalTitle").innerText = "Service Provider Details";
+                document.getElementById("modalDetails").innerText = details;
+                document.getElementById("templateModal").style.display = "block";
+            }
+
+            function closeTemplateDetail() {
+                document.getElementById("templateModal").style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target === document.getElementById("templateModal")) {
+                    closeTemplateDetail();
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

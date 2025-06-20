@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register a Service Provider</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form input, 
+        .form textarea, 
+        .form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form textarea {
+            resize: vertical;
+        }
+
+        .form input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .form .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .form button:hover {
+            background-color: #1E88E5;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        // Function to redirect to the home page after 5 seconds
+        function redirectToHome() {
+            setTimeout(function() {
+                window.location.href = "/";
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Register a Service Provider</h1>
+    <div class="form-container">
+        <div class="form">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="success-message">{{ messages[0] }}</div>
+                    <script>
+                        redirectToHome();
+                    </script>
+                {% endif %}
+            {% endwith %}
+
+            {% if not messages %}
+                <form action="/register" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" placeholder="Enter your name.." required>
+
+                    <label for="service_name">Service Name:</label>
+                    <input type="text" name="service_name" placeholder="Enter service name.." required>
+
+                    <label for="area">Available Area:</label>
+                    <input type="text" name="area" placeholder="Enter available area.." required>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="text" name="phone" placeholder="Enter phone number.." required>
+
+                    <label for="amount">Amount:</label>
+                    <input type="number" name="amount" placeholder="Enter amount.." required>
+
+                    <label for="comment">Work:</label>
+                    <textarea name="comment" rows="4" placeholder="What can I Do..."></textarea>
+
+                    <label>Booking Option:</label>
+                    <div class="radio-group">
+                        <input type="radio" name="booking_option" value="Call">Call
+                        <input type="radio" name="booking_option" value="Message">Message
+                    </div>
+
+                    <label for="field">Field:</label>
+                    <select name="field" id="field" required>
+                        <option value="">Select a field</option>
+                        <option value="software">Software</option>
+                        <option value="training">Training</option>
+                        <option value="event_planning">Event Planning</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="waste_management">Waste Management</option>
+                        <option value="construction">Construction</option>
+                        <option value="health">Health</option>
+                        <option value="insurance">Insurance</option>
+                        <option value="security">Security</option>
+                        <option value="travel_service">Travel Service</option>
+                        <option value="research">Research</option>
+                        <option value="design">Design</option>
+                        <option value="financial">Financial</option>
+                        <option value="delivery">Delivery</option>
+                        <option value="real_estate">Real Estate</option>
+                        <option value="child_care">Child Care</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="tech_support">Tech Support</option>
+                        <option value="video_photography">Video and Photography</option>
+                        <option value="translation">Translation</option>
+                        <option value="other">Other</option>
+                    </select>
+
+                    <button type="submit">Submit</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
